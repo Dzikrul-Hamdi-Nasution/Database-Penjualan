@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="harian.css" />
+        <title>Rincian Harian</title>
+        <script src="jquery-3.5.1.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <img src="assets/img/ozi.png" width="120" height="60" alt="logo fixdy" />
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link active" onclick="logout()" href="index.html">Logout <span class="sr-only">(current)</span></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="judul text-center">
+                <h1>ZAY'S CAKE N' BAKERY</h1>
+                <h3>Data Harian</h3>
+                <input style="width: 100%;" class="isian" placeholder="Masukkan Tanggal" type="text" id="tanggal" />
+            </div>
+
+            <a class="daftar daftar1 btn-1 btn btn-outline-success" href="tahunan.html" role="button">Data Tahunan</a>
+            <a class="daftar btn btn btn-outline-success" href="bulanan.html" role="button">Data Bulanan</a>
+            <a class="daftar btn btn btn-outline-success" href="stok.html" role="button">Data Stok Bolu</a>
+
+            <button onclick="total_penjualan_harian()" type="submit" class="btn btn-success btn-block">Refresh</button>
+            <button onclick="simpan_hari_ini()" type="submit" class="smpn btn btn-success btn-block">Simpan</button>
+
+            <!-- Tombol Pengganti -->
+            <div class="pilih btn-group btn-block" data-header="tombol">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Daftar Data
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="bulanan.html">Data Bulanan</a>
+                    <a class="dropdown-item" href="tahunan.html">Data Tahunan</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="stok.html">Data Stok Bolu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama Bolu</th>
+                        <th scope="col" class="harga">
+                            Harga Jual <br />
+                            (Rp)
+                        </th>
+                        <th scope="col" class="diskon">Diskon</th>
+                        <th scope="col" class="terjual">Terjual</th>
+                        <th scope="col" class="pemasukan">
+                            Pemasukan <br />
+                            (Rp)
+                        </th>
+                        <th scope="col" class="pemasukan">
+                            Jumlah <br />
+                            Terjual
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Bolu Gulung Original</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg1" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds1">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n1" /></div>
+                                <button onclick="update1()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee1" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt1" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Bolu Gulung Coklat</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg2" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds2">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n2" /></div>
+                                <button onclick="update2()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee2" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt2" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Bolu Gulung Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg3" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds3">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n3" /></div>
+                                <button onclick="update3()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee3" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt3" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Bolu Gulung Coklat Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg4" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds4">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n4" /></div>
+                                <button onclick="update4()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee4" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt4" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Bolu Gulung Abon</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg5" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds5">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n5" /></div>
+                                <button onclick="update5()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee5" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt5" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>Bolu Gulung Durian/ +Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg6" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds6">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n6" /></div>
+                                <button onclick="update6()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee6" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt6" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>Bolu Gulung Mocca/ +Keju/ +Other</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg7" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds7">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n7" /></div>
+                                <button onclick="update7()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee7" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt7" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>Brownies Coklat/Pandan Original</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg8" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds8">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n8" /></div>
+                                <button onclick="update8()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee8" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt8" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td>Brownies Coklat Ceres</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg9" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds9">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n9" /></div>
+                                <button onclick="update9()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee9" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt9" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10</th>
+                        <td>Brownies Coklat Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg10" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds10">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n10" /></div>
+                                <button onclick="update10()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee10" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt10" readonly /></td>
+                    </tr>
+
+                    <!--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
+
+                    <tr>
+                        <th scope="row">11</th>
+                        <td>Bolu Gulung Pandan/Mocca Original</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg11" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds11">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n11" /></div>
+                                <button onclick="update11()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee11" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt11" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">12</th>
+                        <td>Bolu Gulung Pandan/Mocca Coklat</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg12" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds12">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n12" /></div>
+                                <button onclick="update12()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee12" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt12" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">13</th>
+                        <td>Bolu Gulung Pandan/Mocca Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg13" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds13">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n13" /></div>
+                                <button onclick="update13()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee13" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt13" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">14</th>
+                        <td>Bolu Gulung Pandan/Mocca Coklat Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg14" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds14">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n14" /></div>
+                                <button onclick="update14()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee14" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt14" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">15</th>
+                        <td>Bolu Gulung Pandan/Mocca Abon</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg15" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds15">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n15" /></div>
+                                <button onclick="update15()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee15" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt15" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">16</th>
+                        <td>Bolu Gulung Pandan/Mocca Durian/ +Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg16" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds16">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n16" /></div>
+                                <button onclick="update16()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee16" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt16" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">17</th>
+                        <td>Bolu Gulung Rainbow Original</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg17" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds17">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n17" /></div>
+                                <button onclick="update17()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee17" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt17" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">18</th>
+                        <td>Bolu Gulung Rainbow Coklat</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg18" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds18">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n18" /></div>
+                                <button onclick="update18()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee18" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt18" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">19</th>
+                        <td>Bolu Gulung Rainbow Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg19" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds19">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n19" /></div>
+                                <button onclick="update19()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee19" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt19" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">20</th>
+                        <td>Bolu Gulung Rainbow Coklat Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg20" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds20">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n20" /></div>
+                                <button onclick="update20()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee20" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt20" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">21</th>
+                        <td>Bolu Gulung Rainbow Durian/ +Keju</td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Harga" type="text" id="hrg21" readonly /></td>
+                        <td>
+                            <select name="diskon" id="ds21">
+                                <option value="0">Normal</option>
+                                <option value="20">20%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="upp">
+                                <div class="quantity"><input type="number" value="0" placeholder="Terjual" id="n21" /></div>
+                                <button onclick="update21()" type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Pemasukan" type="text" id="fee21" readonly /></td>
+                        <td><input style="width: 100%;" class="isian" placeholder="Yang terjual" type="text" id="jt21" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="total">Total Pemasukan (Rp) :</td>
+                        <td><input style="width: 100%;" class="isian total2" placeholder="Pemasukan Total" type="text" id="fee22" readonly /></td>
+                        <td><input style="width: 100%;" class="isian total2" placeholder="Terjual Total" type="text" id="fee23" readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="currency.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyCapjcF6mOARbk0hNZV76WNGyNvqktWTR4",
+                authDomain: "ozi-penjualan.firebaseapp.com",
+                databaseURL: "https://ozi-penjualan.firebaseio.com",
+                projectId: "ozi-penjualan",
+                storageBucket: "ozi-penjualan.appspot.com",
+                messagingSenderId: "1060528585592",
+                appId: "1:1060528585592:web:37bca2871666456668268d",
+                measurementId: "G-F34J4FG8YH",
+            };
+            firebase.initializeApp(config);
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    alert("Selamat Datang")
+                } else {
+                    // No user is signed in.
+                    alert("Silahkan Login Kembali")
+                    window.location.replace('https://ozi-penjualan.firebaseapp.com/index.html')
+                }
+            });
+
+            function logout() {
+                firebase.auth().signOut();
+            }
+
+            $(document).ready(function () {
+                total_penjualan_harian();
+                total_harian();
+                jumlah_terjual();
+                harga_barang();
+                konfirmasi();
+                harga_terjual();
+            });
+
+            var update_stock,
+                kalimat2,
+                total,
+                waktu_hari_ini,
+                total_satu_hari,
+                hitung = 1,
+                total_hari,
+                diskon_total;
+            var lokasi = [];
+
+            function total_penjualan_harian() {
+                total_harian();
+                let fee1 = document.getElementById("fee1").value;
+                let fee2 = document.getElementById("fee2").value;
+                let fee3 = document.getElementById("fee3").value;
+                let fee4 = document.getElementById("fee4").value;
+                let fee5 = document.getElementById("fee5").value;
+                let fee6 = document.getElementById("fee6").value;
+                let fee7 = document.getElementById("fee7").value;
+                let fee8 = document.getElementById("fee8").value;
+                let fee9 = document.getElementById("fee9").value;
+                let fee10 = document.getElementById("fee10").value;
+                let fee11 = document.getElementById("fee11").value;
+                let fee12 = document.getElementById("fee12").value;
+                let fee13 = document.getElementById("fee13").value;
+                let fee14 = document.getElementById("fee14").value;
+                let fee15 = document.getElementById("fee15").value;
+                let fee16 = document.getElementById("fee16").value;
+                let fee17 = document.getElementById("fee17").value;
+                let fee18 = document.getElementById("fee18").value;
+                let fee19 = document.getElementById("fee19").value;
+                let fee20 = document.getElementById("fee20").value;
+                let fee21 = document.getElementById("fee21").value;
+                total_satu_hari = formatNumber(
+                    currency(fee1)
+                        .add(fee2)
+                        .add(fee3)
+                        .add(fee4)
+                        .add(fee5)
+                        .add(fee6)
+                        .add(fee7)
+                        .add(fee8)
+                        .add(fee9)
+                        .add(fee10)
+                        .add(fee11)
+                        .add(fee12)
+                        .add(fee13)
+                        .add(fee14)
+                        .add(fee15)
+                        .add(fee16)
+                        .add(fee17)
+                        .add(fee18)
+                        .add(fee19)
+                        .add(fee20)
+                        .add(fee21)
+                );
+                $("#fee22").val(total_satu_hari);
+            }
+            function total_harian() {
+                let fee1 = document.getElementById("jt1").value;
+                let fee2 = document.getElementById("jt2").value;
+                let fee3 = document.getElementById("jt3").value;
+                let fee4 = document.getElementById("jt4").value;
+                let fee5 = document.getElementById("jt5").value;
+                let fee6 = document.getElementById("jt6").value;
+                let fee7 = document.getElementById("jt7").value;
+                let fee8 = document.getElementById("jt8").value;
+                let fee9 = document.getElementById("jt9").value;
+                let fee10 = document.getElementById("jt10").value;
+                let fee11 = document.getElementById("jt11").value;
+                let fee12 = document.getElementById("jt12").value;
+                let fee13 = document.getElementById("jt13").value;
+                let fee14 = document.getElementById("jt14").value;
+                let fee15 = document.getElementById("jt15").value;
+                let fee16 = document.getElementById("jt16").value;
+                let fee17 = document.getElementById("jt17").value;
+                let fee18 = document.getElementById("jt18").value;
+                let fee19 = document.getElementById("jt19").value;
+                let fee20 = document.getElementById("jt20").value;
+                let fee21 = document.getElementById("jt21").value;
+                total_hari =
+                    parseInt(fee1) +
+                    parseInt(fee2) +
+                    parseInt(fee3) +
+                    parseInt(fee4) +
+                    parseInt(fee5) +
+                    parseInt(fee6) +
+                    parseInt(fee7) +
+                    parseInt(fee8) +
+                    parseInt(fee9) +
+                    parseInt(fee10) +
+                    parseInt(fee11) +
+                    parseInt(fee12) +
+                    parseInt(fee13) +
+                    parseInt(fee14) +
+                    parseInt(fee15) +
+                    parseInt(fee16) +
+                    parseInt(fee17) +
+                    parseInt(fee18) +
+                    parseInt(fee19) +
+                    parseInt(fee20) +
+                    parseInt(fee21);
+                $("#fee23").val(total_hari);
+            }
+            function harga_barang() {
+                var nilai;
+                for (let i = 1; i <= 21; i++) {
+                    nilai = "harga" + i;
+                    //alert(nilai);
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("harga").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat = data;
+                            if (i == 1) {
+                                $("#hrg1").val(kalimat);
+                            }
+                            if (i == 2) {
+                                $("#hrg2").val(kalimat);
+                            }
+                            if (i == 3) {
+                                $("#hrg3").val(kalimat);
+                            }
+                            if (i == 4) {
+                                $("#hrg4").val(kalimat);
+                            }
+                            if (i == 5) {
+                                $("#hrg5").val(kalimat);
+                            }
+                            if (i == 6) {
+                                $("#hrg6").val(kalimat);
+                            }
+                            if (i == 7) {
+                                $("#hrg7").val(kalimat);
+                            }
+                            if (i == 8) {
+                                $("#hrg8").val(kalimat);
+                            }
+                            if (i == 9) {
+                                $("#hrg9").val(kalimat);
+                            }
+                            if (i == 10) {
+                                $("#hrg10").val(kalimat);
+                            }
+                            if (i == 11) {
+                                $("#hrg11").val(kalimat);
+                            }
+                            if (i == 12) {
+                                $("#hrg12").val(kalimat);
+                            }
+                            if (i == 13) {
+                                $("#hrg13").val(kalimat);
+                            }
+                            if (i == 14) {
+                                $("#hrg14").val(kalimat);
+                            }
+                            if (i == 15) {
+                                $("#hrg15").val(kalimat);
+                            }
+                            if (i == 16) {
+                                $("#hrg16").val(kalimat);
+                            }
+                            if (i == 17) {
+                                $("#hrg17").val(kalimat);
+                            }
+                            if (i == 18) {
+                                $("#hrg18").val(kalimat);
+                            }
+                            if (i == 19) {
+                                $("#hrg19").val(kalimat);
+                            }
+                            if (i == 20) {
+                                $("#hrg20").val(kalimat);
+                            }
+                            if (i == 21) {
+                                $("#hrg21").val(kalimat);
+                            }
+                        });
+                    });
+                }
+            }
+            function jumlah_terjual() {
+                var nilai;
+                for (let i = 1; i <= 21; i++) {
+                    nilai = "jt" + i;
+                    //alert(nilai);
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("terjual_harian").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat = data;
+                            if (i == 1) {
+                                $("#jt1").val(kalimat);
+                            }
+                            if (i == 2) {
+                                $("#jt2").val(kalimat);
+                            }
+                            if (i == 3) {
+                                $("#jt3").val(kalimat);
+                            }
+                            if (i == 4) {
+                                $("#jt4").val(kalimat);
+                            }
+                            if (i == 5) {
+                                $("#jt5").val(kalimat);
+                            }
+                            if (i == 6) {
+                                $("#jt6").val(kalimat);
+                            }
+                            if (i == 7) {
+                                $("#jt7").val(kalimat);
+                            }
+                            if (i == 8) {
+                                $("#jt8").val(kalimat);
+                            }
+                            if (i == 9) {
+                                $("#jt9").val(kalimat);
+                            }
+                            if (i == 10) {
+                                $("#jt10").val(kalimat);
+                            }
+                            if (i == 11) {
+                                $("#jt11").val(kalimat);
+                            }
+                            if (i == 12) {
+                                $("#jt12").val(kalimat);
+                            }
+                            if (i == 13) {
+                                $("#jt13").val(kalimat);
+                            }
+                            if (i == 14) {
+                                $("#jt14").val(kalimat);
+                            }
+                            if (i == 15) {
+                                $("#jt15").val(kalimat);
+                            }
+                            if (i == 16) {
+                                $("#jt16").val(kalimat);
+                            }
+                            if (i == 17) {
+                                $("#jt17").val(kalimat);
+                            }
+                            if (i == 18) {
+                                $("#jt18").val(kalimat);
+                            }
+                            if (i == 19) {
+                                $("#jt19").val(kalimat);
+                            }
+                            if (i == 20) {
+                                $("#jt20").val(kalimat);
+                            }
+                            if (i == 21) {
+                                $("#jt21").val(kalimat);
+                            }
+                        });
+                    });
+                }
+            }
+            function harga_terjual() {
+                var nilai;
+                for (let i = 1; i <= 21; i++) {
+                    nilai = "item" + i;
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("pemasukan harian").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat = data;
+                            if (i == 1) {
+                                $("#fee1").val(kalimat);
+                            }
+                            if (i == 2) {
+                                $("#fee2").val(kalimat);
+                            }
+                            if (i == 3) {
+                                $("#fee3").val(kalimat);
+                            }
+                            if (i == 4) {
+                                $("#fee4").val(kalimat);
+                            }
+                            if (i == 5) {
+                                $("#fee5").val(kalimat);
+                            }
+                            if (i == 6) {
+                                $("#fee6").val(kalimat);
+                            }
+                            if (i == 7) {
+                                $("#fee7").val(kalimat);
+                            }
+                            if (i == 8) {
+                                $("#fee8").val(kalimat);
+                            }
+                            if (i == 9) {
+                                $("#fee9").val(kalimat);
+                            }
+                            if (i == 10) {
+                                $("#fee10").val(kalimat);
+                            }
+                            if (i == 11) {
+                                $("#fee11").val(kalimat);
+                            }
+                            if (i == 12) {
+                                $("#fee12").val(kalimat);
+                            }
+                            if (i == 13) {
+                                $("#fee13").val(kalimat);
+                            }
+                            if (i == 14) {
+                                $("#fee14").val(kalimat);
+                            }
+                            if (i == 15) {
+                                $("#fee15").val(kalimat);
+                            }
+                            if (i == 16) {
+                                $("#fee16").val(kalimat);
+                            }
+                            if (i == 17) {
+                                $("#fee17").val(kalimat);
+                            }
+                            if (i == 18) {
+                                $("#fee18").val(kalimat);
+                            }
+                            if (i == 19) {
+                                $("#fee19").val(kalimat);
+                            }
+                            if (i == 20) {
+                                $("#fee20").val(kalimat);
+                            }
+                            if (i == 21) {
+                                $("#fee21").val(kalimat);
+                            }
+                        });
+                    });
+                }
+            }
+
+            function formatNumber(num) {
+                return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            }
+
+            function simpan_hari_ini() {
+                waktu_hari_ini = document.getElementById("tanggal").value;
+                if (waktu_hari_ini == "") {
+                    alert("silahkan isi tanggal");
+                } else {
+                    akumulasi_per_hari();
+                }
+            }
+
+            function akumulasi_per_hari() {
+                var nilai;
+                lokasi = [];
+                for (let i = 1; i <= 30; i++) {
+                    nilai = "tanggal" + i;
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("Akmulasi 1 Bulan").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat = data;
+                            lokasi[i] = kalimat;
+                        });
+                    });
+                }
+
+                var x = 1;
+                var tanggal_naik, pemasukkan_naik;
+                while (x <= 30) {
+                    tanggal_naik = "tanggal" + x;
+                    pemasukkan_naik = "pemasukan" + x;
+                    if (lokasi[x] == "Empty") {
+                        firebase.database().ref("Akmulasi 1 Bulan").child(tanggal_naik).update({
+                            nilai: waktu_hari_ini,
+                        });
+                        firebase.database().ref("Akmulasi 1 Bulan").child(pemasukkan_naik).update({
+                            nilai: total_satu_hari,
+                        });
+                        x = 31;
+                    } else {
+                        x++;
+                    }
+                }
+                if (hitung == 1) {
+                    alert("Apakah Anda ingin menyimpan akumulasi 1 hari ?   Tekan Tombol sekali lagi");
+                    total_penjualan_harian();
+                    total_harian();
+                }
+                if (hitung == 2) {
+                    alert("Data telah disimpan");
+                    total_penjualan_harian();
+                    total_harian();
+                    reset_nilai();
+                    hitung = 1;
+                }
+                hitung++;
+            }
+
+            function reset_nilai() {
+                var nilai, nilai2;
+                for (let i = 1; i <= 21; i++) {
+                    nilai = "jt" + i;
+                    nilai2 = "item" + i;
+                    firebase.database().ref("terjual_harian").child(nilai).update({
+                        nilai: "0",
+                    });
+                    firebase.database().ref("pemasukan harian").child(nilai2).update({
+                        nilai: "0",
+                    });
+                }
+                $("#fee1").val("0");
+                $("#fee2").val("0");
+                $("#fee3").val("0");
+                $("#fee4").val("0");
+                $("#fee5").val("0");
+                $("#fee6").val("0");
+                $("#fee7").val("0");
+                $("#fee8").val("0");
+                $("#fee9").val("0");
+                $("#fee10").val("0");
+                $("#fee11").val("0");
+                $("#fee12").val("0");
+                $("#fee13").val("0");
+                $("#fee14").val("0");
+                $("#fee15").val("0");
+                $("#fee16").val("0");
+                $("#fee17").val("0");
+                $("#fee18").val("0");
+                $("#fee19").val("0");
+                $("#fee20").val("0");
+                $("#fee21").val("0");
+            }
+
+            function konfirmasi() {
+                var nilai;
+                for (let i = 1; i <= 21; i++) {
+                    nilai = "sisa" + i;
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("stock").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat2 = data;
+                        });
+                    });
+                    update_stock = kalimat2 - 0;
+                    if (i == 1) {
+                        $("#fee1").val("0");
+                    }
+                    if (i == 2) {
+                        $("#fee2").val("0");
+                    }
+                    if (i == 3) {
+                        $("#fee3").val("0");
+                    }
+                    if (i == 4) {
+                        $("#fee4").val("0");
+                    }
+                    if (i == 5) {
+                        $("#fee5").val("0");
+                    }
+                    if (i == 6) {
+                        $("#fee6").val("0");
+                    }
+                    if (i == 7) {
+                        $("#fee7").val("0");
+                    }
+                    if (i == 8) {
+                        $("#fee8").val("0");
+                    }
+                    if (i == 9) {
+                        $("#fee9").val("0");
+                    }
+                    if (i == 10) {
+                        $("#fee10").val("0");
+                    }
+                    if (i == 11) {
+                        $("#fee11").val("0");
+                    }
+                    if (i == 12) {
+                        $("#fee12").val("0");
+                    }
+                    if (i == 13) {
+                        $("#fee13").val("0");
+                    }
+                    if (i == 14) {
+                        $("#fee14").val("0");
+                    }
+                    if (i == 15) {
+                        $("#fee15").val("0");
+                    }
+                    if (i == 16) {
+                        $("#fee16").val("0");
+                    }
+                    if (i == 17) {
+                        $("#fee17").val("0");
+                    }
+                    if (i == 18) {
+                        $("#fee18").val("0");
+                    }
+                    if (i == 19) {
+                        $("#fee19").val("0");
+                    }
+                    if (i == 20) {
+                        $("#fee20").val("0");
+                    }
+                    if (i == 21) {
+                        $("#fee21").val("0");
+                    }
+                }
+            }
+
+            function update1() {
+                var yang_terjual = 0;
+                var yang_terjual = document.getElementById("n1").value;
+                var terjual = document.getElementById("jt1").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt1").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga1");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+
+                diskon_total = (kalimat - (kalimat * ds1.value) / 100) * 1000;
+                $("#hrg1").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee1").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee1").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item1")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa1");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = parseInt(kalimat2) - parseInt(yang_terjual);
+                firebase
+                    .database()
+                    .ref("stock")
+                    .child("sisa1")
+                    .update({
+                        nilai: parseInt(update_stock),
+                    });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasil di update");
+            }
+            function update2() {
+                var yang_terjual = 0;
+                yang_terjual = document.getElementById("n2").value;
+                var terjual = document.getElementById("jt2").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt2").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga2");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds2.value) / 100) * 1000;
+                $("#hrg2").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee2").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee2").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item2")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa2");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = 0;
+                update_stock = parseInt(kalimat2) - parseInt(yang_terjual);
+                firebase
+                    .database()
+                    .ref("stock")
+                    .child("sisa2")
+                    .update({
+                        nilai: parseInt(update_stock),
+                    });
+                update_stock = 0;
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasil di update");
+            }
+            function update3() {
+                var yang_terjual = 0;
+                yang_terjual = document.getElementById("n3").value;
+                var terjual = document.getElementById("jt3").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt3").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga3");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds3.value) / 100) * 1000;
+                $("#hrg3").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee3").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee3").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item3")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa3");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = 0;
+                update_stock = parseInt(kalimat2) - parseInt(yang_terjual);
+                firebase
+                    .database()
+                    .ref("stock")
+                    .child("sisa3")
+                    .update({
+                        nilai: parseInt(update_stock),
+                    });
+                update_stock = 0;
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasil di update");
+            }
+            function update4() {
+                var yang_terjual = document.getElementById("n4").value;
+                var terjual = document.getElementById("jt4").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt4").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga4");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds4.value) / 100) * 1000;
+                $("#hrg4").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee4").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee4").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item4")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa4");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa4").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update5() {
+                var yang_terjual = document.getElementById("n5").value;
+                var terjual = document.getElementById("jt5").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt5").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga5");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds5.value) / 100) * 1000;
+                $("#hrg5").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee5").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee5").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item5")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa5");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa5").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update6() {
+                var yang_terjual = document.getElementById("n6").value;
+                var terjual = document.getElementById("jt6").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt6").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga6");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds6.value) / 100) * 1000;
+                $("#hrg6").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee6").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee6").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item6")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa6");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa6").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update7() {
+                var yang_terjual = document.getElementById("n7").value;
+                var terjual = document.getElementById("jt7").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt7").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga7");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds7.value) / 100) * 1000;
+                $("#hrg7").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee7").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item7")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa7");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa7").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update8() {
+                var yang_terjual = document.getElementById("n8").value;
+                var terjual = document.getElementById("jt8").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt8").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga8");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds8.value) / 100) * 1000;
+                $("#hrg8").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee8").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee8").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item8")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa8");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa8").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update9() {
+                var yang_terjual = document.getElementById("n9").value;
+                var terjual = document.getElementById("jt9").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt9").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga9");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds9.value) / 100) * 1000;
+                $("#hrg9").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee9").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee9").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item9")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa9");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa9").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update10() {
+                var yang_terjual = document.getElementById("n10").value;
+                var terjual = document.getElementById("jt10").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt10").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga10");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds10.value) / 100) * 1000;
+                $("#hrg10").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee10").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee10").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item10")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa10");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa10").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update11() {
+                var yang_terjual = document.getElementById("n11").value;
+                var terjual = document.getElementById("jt11").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt11").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga11");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds11.value) / 100) * 1000;
+                $("#hrg11").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee11").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee11").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item11")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa11");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa11").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update12() {
+                var yang_terjual = document.getElementById("n12").value;
+                var terjual = document.getElementById("jt12").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt12").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga12");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds12.value) / 100) * 1000;
+                $("#hrg12").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee12").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee12").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item12")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa12");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa12").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update13() {
+                var yang_terjual = document.getElementById("n13").value;
+                var terjual = document.getElementById("jt13").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt13").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga13");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds13.value) / 100) * 1000;
+                $("#hrg13").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee13").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee1").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item13")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa13");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa13").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update14() {
+                var yang_terjual = document.getElementById("n14").value;
+                var terjual = document.getElementById("jt14").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt14").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga14");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds14.value) / 100) * 1000;
+                $("#hrg14").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee14").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee14").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item14")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa14");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa14").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update15() {
+                var yang_terjual = document.getElementById("n15").value;
+                var terjual = document.getElementById("jt15").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt15").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga15");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds15.value) / 100) * 1000;
+                $("#hrg15").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee15").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee15").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item15")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa15");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa15").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update16() {
+                var yang_terjual = document.getElementById("n16").value;
+                var terjual = document.getElementById("jt16").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt16").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga16");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds16.value) / 100) * 1000;
+                $("#hrg16").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee16").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee16").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item16")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa16");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa16").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update17() {
+                var yang_terjual = document.getElementById("n17").value;
+                var terjual = document.getElementById("jt17").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt17").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga17");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds17.value) / 100) * 1000;
+                $("#hrg17").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee17").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee17").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item17")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa17");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa17").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update18() {
+                var yang_terjual = document.getElementById("n18").value;
+                var terjual = document.getElementById("jt18").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt18").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga18");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds18.value) / 100) * 1000;
+                $("#hrg18").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee18").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee18").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item18")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa18");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa18").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update19() {
+                var yang_terjual = document.getElementById("n19").value;
+                var terjual = document.getElementById("jt19").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt19").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga19");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds19.value) / 100) * 1000;
+                $("#hrg19").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee19").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee19").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item19")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa19");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa19").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update20() {
+                var yang_terjual = document.getElementById("n20").value;
+                var terjual = document.getElementById("jt20").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt20").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga20");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds20.value) / 100) * 1000;
+                $("#hrg20").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee20").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee20").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item20")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa20");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa20").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+            function update21() {
+                var yang_terjual = document.getElementById("n21").value;
+                var terjual = document.getElementById("jt21").value;
+                var hasil_terjual = parseInt(terjual) + parseInt(yang_terjual);
+                firebase.database().ref("terjual_harian").child("jt21").update({
+                    nilai: hasil_terjual,
+                });
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("harga").child("harga21");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat = data;
+                    });
+                });
+                diskon_total = (kalimat - (kalimat * ds21.value) / 100) * 1000;
+                $("#hrg21").val(formatNumber(diskon_total));
+                var harga_diskon = formatNumber(yang_terjual * diskon_total);
+                var harga_pemasukan = document.getElementById("fee21").value;
+                var total = currency(harga_diskon).add(harga_pemasukan);
+                alert(harga_diskon);
+                $("#fee21").val(formatNumber(total));
+                firebase
+                    .database()
+                    .ref("pemasukan harian")
+                    .child("item21")
+                    .update({
+                        nilai: formatNumber(total),
+                    });
+
+                var messagesRef = firebase.database();
+                var ref = messagesRef.ref("stock").child("sisa21");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        data = childSnapshot.val();
+                        console.log(data);
+                        kalimat2 = data;
+                    });
+                });
+                var update_stock = kalimat2 - yang_terjual;
+                firebase.database().ref("stock").child("sisa21").update({
+                    nilai: update_stock,
+                });
+                total_penjualan_harian();
+                total_harian();
+                alert("berhasl di update");
+            }
+        </script>
+        <!-- Footer -->
+        <footer class="page-footer font-small mdb-color pt-4">
+            <div class="container text-center text-md-left">
+                <div class="row text-center text-md-left mt-3 pb-3">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">FIXDY</h6>
+                        <p>Startup yang berfokus pada penyediaan layanan Jasa.</p>
+                    </div>
+                    <hr class="w-100 clearfix d-md-none" />
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                        <p>
+                            <a class="ngelink" href="mailto:aksaafrian7@gmail.com"> <i class="fas fa-envelope mr-3"></i> aksaafrian7@gmail.com </a>
+                        </p>
+                        <p>
+                            <a class="ngelink" href="https://api.whatsapp.com/send?phone=6282167726979"> <i class="fab fa-whatsapp mr-3"></i> 082167726979 </a>
+                        </p>
+                    </div>
+                </div>
+                <hr />
+                <div class="row d-flex align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-md-7 col-lg-8">
+                        <!--Copyright-->
+                        <p class="text-center text-md-left">
+                            © 2020 Copyright:
+                            <strong> Fixdy.id</strong>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <div class="col-md-5 col-lg-4 ml-lg-0">
+                        <div class="text-center text-md-right">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-google-plus-g"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <img style="background-color: white;" src="assets/img/fixdy.png" height="30px" width="50px;" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

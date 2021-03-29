@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link rel="stylesheet" href="tahunan.css" />
+        <title>Rincian Tahunan</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <img src="assets/img/ozi.png" width="120" height="80" alt="logo fixdy" />
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link active" onclick="logout()" href="index.html">Logout <span class="sr-only">(current)</span></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="judul text-center">
+                <h1>ZAY'S CAKE N' BAKERY</h1>
+                <h3>Data Tahunan</h3>
+            </div>
+            <a class="daftar daftar1 btn-1 btn btn-outline-success" href="bulanan.html" role="button">Data Bulanan</a>
+            <a class="daftar btn btn-outline-success" href="harian.html" role="button">Data Harian</a>
+            <a class="daftar btn btn btn-outline-success" href="stok.html" role="button">Data Stok Bolu</a>
+
+            <button onclick="reset_nilai()" type="submit" class="btn btn-success btn-block">Hapus Data</button>
+            <button onclick="total_penjualan_tahunan()" type="submit" class="smpn btn btn-success btn-block">Refresh</button>
+
+            <!-- Tombol Pengganti -->
+            <div class="pilih btn-group btn-block" data-header="tombol">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Daftar Data
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="harian.html">Data Harian</a>
+                    <a class="dropdown-item" href="bulanan.html">Data Bulanan</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="stok.html">Data Stok Bolu</a>
+                </div>
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Month</th>
+                        <th scope="col">
+                            Pemasukan <br />
+                            (Rp)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp1" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee1" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp2" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee2" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp3" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee3" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp4" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee4" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp5" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee5" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp6" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee6" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp7" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee7" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp8" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee8" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp9" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee9" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp10" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee10" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">11</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp11" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee11" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">12</th>
+                        <td><input style="width: 60%;" class="isian" placeholder="Masukkan bulan penjualan" type="text" id="bp12" /></td>
+                        <td><input style="width: 90%;" class="isian" placeholder="Jumlah laba" type="text" id="fee12" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="total">Total Pemasukan Satu Tahun (Rp) :</td>
+                        <td><input style="width: 100%;" class="isian total2" placeholder="Pemasukan Total" type="text" id="fee22" readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script src="currency.js"></script>
+
+        <script src="/__/firebase/7.14.4/firebase-app.js"></script>
+        <script src="/__/firebase/7.14.4/firebase-analytics.js"></script>
+        <script src="/__/firebase/7.14.4/firebase-auth.js"></script>
+        <script src="/__/firebase/7.14.4/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyCapjcF6mOARbk0hNZV76WNGyNvqktWTR4",
+                authDomain: "ozi-penjualan.firebaseapp.com",
+                databaseURL: "https://ozi-penjualan.firebaseio.com",
+                projectId: "ozi-penjualan",
+                storageBucket: "ozi-penjualan.appspot.com",
+                messagingSenderId: "1060528585592",
+                appId: "1:1060528585592:web:37bca2871666456668268d",
+                measurementId: "G-F34J4FG8YH",
+            };
+            firebase.initializeApp(config);
+
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    //alert("Selamat Datang")
+                } else {
+                    // No user is signed in.
+                    alert("Silahkan Login Kembali")
+                    window.location.replace('https://ozi-penjualan.firebaseapp.com/index.html')
+                }
+            });
+
+            function logout() {
+                firebase.auth().signOut();
+            }
+
+            $(document).ready(function () {
+                Bulan_ke();
+                pendapatan();
+                total_penjualan_tahunan();
+            });
+
+            var total_satu_tahun;
+
+            function formatNumber(num) {
+                return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            }
+
+            function total_penjualan_tahunan() {
+                var fee1 = document.getElementById("fee1").value;
+                let fee2 = document.getElementById("fee2").value;
+                let fee3 = document.getElementById("fee3").value;
+                let fee4 = document.getElementById("fee4").value;
+                let fee5 = document.getElementById("fee5").value;
+                let fee6 = document.getElementById("fee6").value;
+                let fee7 = document.getElementById("fee7").value;
+                let fee8 = document.getElementById("fee8").value;
+                let fee9 = document.getElementById("fee9").value;
+                let fee10 = document.getElementById("fee10").value;
+                let fee11 = document.getElementById("fee11").value;
+                let fee12 = document.getElementById("fee12").value;
+                total_satu_tahun = formatNumber(currency(fee1).add(fee2).add(fee3).add(fee4).add(fee5).add(fee6).add(fee7).add(fee8).add(fee9).add(fee10).add(fee11).add(fee12));
+                $("#fee22").val(total_satu_tahun);
+            }
+
+            function Bulan_ke() {
+                var nilai;
+                for (let i = 1; i <= 12; i++) {
+                    nilai = "bulan" + i;
+                    //alert(nilai);
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("Akmulasi 1 Tahun").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat = data;
+                            if (i == 1) {
+                                $("#bp1").val(kalimat);
+                            }
+                            if (i == 2) {
+                                $("#bp2").val(kalimat);
+                            }
+                            if (i == 3) {
+                                $("#bp3").val(kalimat);
+                            }
+                            if (i == 4) {
+                                $("#bp4").val(kalimat);
+                            }
+                            if (i == 5) {
+                                $("#bp5").val(kalimat);
+                            }
+                            if (i == 6) {
+                                $("#bp6").val(kalimat);
+                            }
+                            if (i == 7) {
+                                $("#bp7").val(kalimat);
+                            }
+                            if (i == 8) {
+                                $("#bp8").val(kalimat);
+                            }
+                            if (i == 9) {
+                                $("#bp9").val(kalimat);
+                            }
+                            if (i == 10) {
+                                $("#bp10").val(kalimat);
+                            }
+                            if (i == 11) {
+                                $("#bp11").val(kalimat);
+                            }
+                            if (i == 12) {
+                                $("#bp12").val(kalimat);
+                            }
+                        });
+                    });
+                }
+            }
+
+            function pendapatan() {
+                var nilai;
+                for (let i = 1; i <= 12; i++) {
+                    nilai = "pemasukan" + i;
+                    //alert(nilai);
+                    var messagesRef = firebase.database();
+                    var ref = messagesRef.ref("Akmulasi 1 Tahun").child(nilai);
+                    ref.on("value", function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            data = childSnapshot.val();
+                            console.log(data);
+                            kalimat = data;
+                            if (i == 1) {
+                                $("#fee1").val(kalimat);
+                            }
+                            if (i == 2) {
+                                $("#fee2").val(kalimat);
+                            }
+                            if (i == 3) {
+                                $("#fee3").val(kalimat);
+                            }
+                            if (i == 4) {
+                                $("#fee4").val(kalimat);
+                            }
+                            if (i == 5) {
+                                $("#fee5").val(kalimat);
+                            }
+                            if (i == 6) {
+                                $("#fee6").val(kalimat);
+                            }
+                            if (i == 7) {
+                                $("#fee7").val(kalimat);
+                            }
+                            if (i == 8) {
+                                $("#fee8").val(kalimat);
+                            }
+                            if (i == 9) {
+                                $("#fee9").val(kalimat);
+                            }
+                            if (i == 10) {
+                                $("#fee10").val(kalimat);
+                            }
+                            if (i == 11) {
+                                $("#fee11").val(kalimat);
+                            }
+                            if (i == 12) {
+                                $("#fee12").val(kalimat);
+                            }
+                        });
+                    });
+                }
+            }
+
+            function reset_nilai() {
+                var nilai, nilai2;
+                for (let i = 1; i <= 12; i++) {
+                    nilai = "bulan" + i;
+                    nilai2 = "pemasukan" + i;
+                    firebase.database().ref("Akmulasi 1 Tahun").child(nilai).update({
+                        nilai: "Empty",
+                    });
+                    firebase.database().ref("Akmulasi 1 Tahun").child(nilai2).update({
+                        nilai: "0",
+                    });
+                }
+                alert("Berhasil Reset Nilai");
+            }
+        </script>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small mdb-color pt-4">
+            <div class="container text-center text-md-left">
+                <div class="row text-center text-md-left mt-3 pb-3">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">FIXDY</h6>
+                        <p>Startup yang berfokus pada penyediaan layanan Jasa.</p>
+                    </div>
+                    <hr class="w-100 clearfix d-md-none" />
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                        <p>
+                            <a class="ngelink" href="mailto:aksaafrian7@gmail.com"> <i class="fas fa-envelope mr-3"></i> aksaafrian7@gmail.com </a>
+                        </p>
+                        <p>
+                            <a class="ngelink" href="https://api.whatsapp.com/send?phone=6282167726979"> <i class="fab fa-whatsapp mr-3"></i> 082167726979 </a>
+                        </p>
+                    </div>
+                </div>
+                <hr />
+                <div class="row d-flex align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-md-7 col-lg-8">
+                        <!--Copyright-->
+                        <p class="text-center text-md-left">
+                            © 2020 Copyright:
+                            <strong> Fixdy.id</strong>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <div class="col-md-5 col-lg-4 ml-lg-0">
+                        <div class="text-center text-md-right">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-google-plus-g"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                        <img style="background-color: white;" src="assets/img/fixdy.png" height="30px" width="50px;" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,264 @@
+body {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  /*Awal Navbar*/
+  .navbar{
+    background-color: #3fb65f;
+  }
+  .navbar-light .navbar-nav .nav-link.active {
+    color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT';
+    font-size: 25px;
+  }
+
+/*Awal Judul ZAY'S*/
+  .judul {
+    margin: 20px 0 15px 0;
+}
+
+/*Awal Tombol Pilihan*/
+.daftar{
+  float: right;
+  margin: 0 15px 15px 0;
+}
+.daftar1 {
+  margin-right: 0px;
+}
+.btn-block + .btn-block {
+  margin-top: 15px;
+}
+
+/*Awal Head Tabel*/
+@media screen and (max-width: 768px) {
+  .table-container {
+    overflow: auto;
+    margin: 20px 3px 0 3px;
+  }
+  .daftar {
+    display: none;
+  }
+  .quantity input {
+    margin-bottom: 10px;
+  }
+  .table-container {
+    width: 97%;
+    margin: 0px auto;
+  }
+  .total, .total2 {
+    text-align: left;
+    font-weight: 700;
+    font-size: 19px;
+  }
+}
+@media screen and (min-width:769px) {
+  .pilih {
+    display: none;
+  }
+  .table-container {
+    width: 83%;
+    margin: 0px auto;
+  }
+  .total, .total2 {
+    text-align: right;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #292727;
+  text-shadow: 1px 1px 0px #8cd79b;
+  background: #eaebec;
+  border: #ccc 1px solid;
+  margin-top: 25px;
+}
+.harga {
+    width: 180px;
+  }
+  
+  .terjual {
+    width: 180px;
+  }
+  
+  .terjual {
+    width: 200px;
+  }
+  
+  .pemasukan {
+    width: 280px;
+  }
+  
+  .semua {
+    padding: 0 60px;
+  }
+
+  /*Awal Isi Cell Pemasukan*/
+  .isian {
+      font-size: 13pt;
+      background: transparent;
+      color: black;
+      border: none;
+      margin-left: 20px;
+  }
+  
+  .isian:focus {
+      outline: none;
+  }
+  
+  /*Awal Pengaturan Tabel*/
+  .table td, .table th {
+    padding: .45rem;
+    vertical-align: inherit;
+  }
+  
+  .table thead th {
+    vertical-align: inherit;
+  }
+  .table-bordered th {
+    border: 1px solid #1f5a2d;
+  }
+  .table-bordered td {
+    border: 1px solid #1f5a2d;
+  }
+  .table .thead-dark th {
+    color: #331f1f;
+    background-color: #3fb65f;
+    border-color: #1f5a2d;
+  }
+
+  th {
+    text-align: center;
+  }
+  table th {
+    padding: 15px 0;
+    border-left:1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    background: #3fb65f;
+  }
+  
+  table tr:hover td {
+    background: #f2f2f2;
+  }
+  
+  /*Awal Input Jumlah Terjual*/
+  .quantity {
+    position: relative;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button
+  {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  input[type=number]
+  {
+    -moz-appearance: textfield;
+  }
+  
+  .quantity input {
+    margin-top: 10px;
+    width: 65px;
+    float: left;
+    display: block;
+    padding-left: 20px;
+    background-color: transparent;
+  }
+  
+  .quantity input:focus {
+    outline: 0;
+  }
+  
+  .quantity-nav {
+    float: left;
+    position: relative;
+    height: 42px;
+  }
+  
+  .quantity-button {
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 13px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+    line-height: 1.7;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+  
+  .quantity-button.quantity-up {
+    position: absolute;
+    height: 50%;
+    top: 0;
+  }
+  
+  .quantity-button.quantity-down {
+    position: absolute;
+    bottom: -1px;
+    height: 50%;
+  }
+  
+  /*Awal Footer*/
+  footer {
+    background-color: #1f5a2d;
+    color: #e0e0e0;
+    margin-top: 110px;
+  }
+  
+  /*Awal Link Footer*/
+  .ngelink {
+    text-decoration: none;
+    color: #e0e0e0;
+  }
+  .ngelink:hover {
+    text-decoration: none;
+    color: #0598ec;
+  }
+  
+  /*Awal Garis hr Footer*/
+  hr{
+    margin-top: 0.3rem;
+    margin-bottom: 0rem;
+    border: 0;
+    height: 30px;
+    border-style: solid;
+    border-color: #8c8c8c;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+  }
+  hr:before {
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top:  -31px;
+    border-style: solid;
+    border-color: #8c8c8c;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+  }
+  p {
+    margin-top: -25px;
+    margin-bottom: 0.rem;
+  }
+  dl, ol, ul {
+    margin-top: -25px;
+    margin-bottom: 0.rem;
+  }
+  .pb-3, .py-3 {
+    padding-bottom: 0rem !important;
+  }
+  .mt-3, .my-3 {
+    margin-top: 0.1rem !important;
+  }
